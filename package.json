@@ -1,0 +1,22 @@
+{
+  "name": "mansa-frontend",
+  "version": "1.0.0",
+  "description": "MANSA Cognitive Mind-Gaming and Memory Arena Frontend",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite --port 8123 --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "gaming",
+    "memory",
+    "mind-sports",
+    "cognitive"
+  ],
+  "author": "MANSA Team",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^5.2.0"
+  }
+}
