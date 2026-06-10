@@ -9,9 +9,634 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="root"></div>
-    <script src="./app.js"></script>
+    <!-- Cyberpunk grid and background effects -->
+    <div class="grid-overlay"></div>
+    <div class="scanlines"></div>
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Main Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo" id="nav-logo">
+                <span class="logo-accent">M</span>ANSA<span class="logo-dot">.</span>
+            </a>
+            
+            <nav class="nav-links" id="nav-links">
+                <a href="#home" class="nav-item active" data-tab="home">Home</a>
+                <a href="#train" class="nav-item" data-tab="train">Train</a>
+                <a href="#about" class="nav-item" data-tab="about">About</a>
+                <a href="#login" class="nav-item" data-tab="login" id="login-nav-link">Login</a>
+            </nav>
+
+            <div class="nav-actions">
+                <div class="user-status-widget hidden" id="user-status-widget">
+                    <span class="user-tag" id="user-display-name">Guest_Athlete</span>
+                    <button class="logout-btn" id="logout-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                    </button>
+                </div>
+                <div class="audio-toggle" id="audio-toggle" title="Toggle Sound FX">
+                    <svg class="sound-on" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    <svg class="sound-off hidden" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                </div>
+            </div>
+
+            <!-- Mobile menu button -->
+            <button class="mobile-menu-toggle" id="mobile-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Viewport Container -->
+    <main class="viewport">
+        
+        <!-- HOME SECTION -->
+        <section id="home-section" class="tab-content active-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="cyber-badge">SYSTEM STATUS: ONLINE</div>
+                    <h1 class="hero-title">ASCEND YOUR <br><span class="neon-glow text-gradient">COGNITIVE LIMITS</span></h1>
+                    <p class="hero-subtitle">Welcome to MANSA. Train your visual memory, level up your brain capacity, and compete in the ultimate digital mental training grounds.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary btn-glow" id="hero-train-btn">
+                            <span class="btn-text">START TRAINING</span>
+                            <span class="btn-glow-effect"></span>
+                        </button>
+                        <button class="btn btn-secondary" id="hero-login-btn">
+                            <span class="btn-text">JOIN THE ARENA</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="cyber-cube-container">
+                        <div class="cyber-cube">
+                            <div class="face front"></div>
+                            <div class="face back"></div>
+                            <div class="face right"></div>
+                            <div class="face left"></div>
+                            <div class="face top"></div>
+                            <div class="face bottom"></div>
+                        </div>
+                        <div class="cube-glow"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="arena-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">🧠</div>
+                    <div class="stat-value" data-val="14285">0</div>
+                    <div class="stat-label">ACTIVE ATHLETES</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-value" data-val="98.4">0</div>
+                    <div class="stat-label">RECALL ACCURACY %</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🎮</div>
+                    <div class="stat-value" data-val="64230">0</div>
+                    <div class="stat-label">GAMES COMPLETED</div>
+                </div>
+            </div>
+
+            <!-- Executive Council Section -->
+            <div class="council-container">
+                <div class="section-header text-center">
+                    <h2 class="neon-magenta">MANSA COGNITIVE COUNCIL</h2>
+                    <p>Meet the mental athletes, speed-timers, and visionaries leading the arena.</p>
+                </div>
+                
+                <div class="council-grid">
+                    <div class="council-card glass-panel card-purple">
+                        <div class="council-badge">CHAIRMAN</div>
+                        <div class="council-avatar-glow">
+                            <span class="avatar-icon">🧠</span>
+                        </div>
+                        <h3 class="council-name">DR. MARCUS MIND</h3>
+                        <p class="council-title">MEM-GRANDMASTER</p>
+                        <p class="council-desc">Fostering global mental sports since 2018. Holding 12 national cards memory records and guiding neural development cycles.</p>
+                    </div>
+
+                    <div class="council-card glass-panel card-cyan">
+                        <div class="council-badge">PRESIDENT</div>
+                        <div class="council-avatar-glow">
+                            <span class="avatar-icon">⚡</span>
+                        </div>
+                        <h3 class="council-name">SARAH NEURON</h3>
+                        <p class="council-title">COGNITIVE CO-FOUNDER</p>
+                        <p class="council-desc">Pioneered spatial sequence recall algorithms. Dedicated to high-frequency training models and adaptive level scaling.</p>
+                    </div>
+
+                    <div class="council-card glass-panel card-magenta">
+                        <div class="council-badge">VICE PRESIDENT</div>
+                        <div class="council-avatar-glow">
+                            <span class="avatar-icon">⏱️</span>
+                        </div>
+                        <h3 class="council-name">JAX STACKMAT</h3>
+                        <p class="council-title">CALIBRATIONS ENGINEER</p>
+                        <p class="council-desc">Spearheaded physical interface and stackmat stopwatch integration to ensure precision speed-memorization tracking.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRAIN SECTION -->
+        <section id="train-section" class="tab-content">
+            <div class="section-header text-center">
+                <h2 class="neon-purple">COGNITIVE TESTING CHAMBER</h2>
+                <p>Configure hard memory disciplines or push arcade drills to extreme difficulty with multi-task marathons.</p>
+            </div>
+            
+            <div class="training-flow">
+                <!-- Training Setup Panel (competition format, discipline, difficulty) -->
+                <div class="training-setup-panel" id="training-setup-panel">
+                    <div class="setup-row">
+                        <label class="setup-label" for="training-format">Select a competition format:</label>
+                        <select id="training-format" class="setup-select">
+                            <option value="arcade">Standard Arcade</option>
+                            <option value="customisable" selected>Customisable Training</option>
+                            <option value="marathon">Multi-Task Marathon</option>
+                        </select>
+                    </div>
+                    <div class="setup-row" id="discipline-row">
+                        <label class="setup-label" for="training-discipline">Select a discipline:</label>
+                        <select id="training-discipline" class="setup-select">
+                            <option value="Numbers" selected>Numbers</option>
+                            <option value="Names & Faces">Names &amp; Faces</option>
+                            <option value="Words">Words</option>
+                            <option value="Dates">Dates</option>
+                            <option value="Cards">Cards</option>
+                            <option value="Cards Recall">Cards Recall Only</option>
+                            <option value="Images">Images</option>
+                            <option value="Binary">Binary</option>
+                        </select>
+                    </div>
+                    <div class="setup-row setup-row-inline">
+                        <div class="setup-field">
+                            <label class="setup-label" for="training-difficulty">Difficulty:</label>
+                            <select id="training-difficulty" class="setup-select">
+                                <option value="standard">Standard</option>
+                                <option value="hard" selected>Hard</option>
+                                <option value="extreme">Extreme</option>
+                            </select>
+                        </div>
+                        <div class="setup-field" id="skin-row">
+                            <span class="setup-label">Skin:</span>
+                            <div class="skin-options">
+                                <label class="skin-option">
+                                    <input type="radio" name="training-skin" value="analogue" checked>
+                                    <span class="skin-preview skin-analogue"></span>
+                                    <span>Analogue</span>
+                                </label>
+                                <label class="skin-option">
+                                    <input type="radio" name="training-skin" value="digital">
+                                    <span class="skin-preview skin-digital"></span>
+                                    <span>Digital</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="custom-settings-panel" id="custom-settings-panel">
+                        <div class="setup-row setup-row-inline">
+                            <div class="setup-field">
+                                <label class="setup-label" for="custom-amount">Amount:</label>
+                                <input type="number" id="custom-amount" class="setup-input" value="100" min="20" max="500" step="10">
+                            </div>
+                            <div class="setup-field">
+                                <label class="setup-label" for="custom-grouping">Grouping:</label>
+                                <input type="text" id="custom-grouping" class="setup-input" value="3" placeholder="3 or 3-3-3">
+                            </div>
+                        </div>
+                        <div class="setup-row setup-row-inline">
+                            <div class="setup-field">
+                                <label class="setup-label">Memo time:</label>
+                                <div class="time-inputs">
+                                    <input type="number" id="custom-memo-min" class="setup-input setup-input-sm" value="2" min="0" max="30"> min
+                                    <input type="number" id="custom-memo-sec" class="setup-input setup-input-sm" value="0" min="0" max="59"> sec
+                                </div>
+                            </div>
+                            <div class="setup-field">
+                                <label class="setup-label">Recall time:</label>
+                                <div class="time-inputs">
+                                    <input type="number" id="custom-recall-min" class="setup-input setup-input-sm" value="5" min="1" max="60"> min
+                                    <input type="number" id="custom-recall-sec" class="setup-input setup-input-sm" value="0" min="0" max="59"> sec
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="setup-note">Sessions use localStorage so you can resume memorization and recall tasks at any point.</p>
+                </div>
+
+                <div class="training-game-panel">
+                    <div class="training-game-panel-header">
+                        <div>
+                            <span class="training-game-panel-kicker">STEP 02</span>
+                            <h3 class="training-game-panel-title">GAME ARENA</h3>
+                        </div>
+                        <p class="training-game-panel-copy">Launch the selected drill below. The arena is larger so the patterns and recall stages are easier to read at a glance.</p>
+                    </div>
+
+                <!-- Game Mode Changer Bar (arcade drills — shown for Standard Arcade & Marathon) -->
+                <div class="game-selector-bar" id="arcade-selector-bar">
+                    <button class="mode-tab-btn active" id="mode-grid">
+                        <span class="tab-icon">🌐</span>
+                        <span class="tab-title">Grid Flash</span>
+                    </button>
+                    <button class="mode-tab-btn" id="mode-sequence">
+                        <span class="tab-icon">🔢</span>
+                        <span class="tab-title">Number Sequence</span>
+                    </button>
+                    <button class="mode-tab-btn" id="mode-cards">
+                        <span class="tab-icon">🃏</span>
+                        <span class="tab-title">Card Match</span>
+                    </button>
+                    <button class="mode-tab-btn" id="mode-repeat">
+                        <span class="tab-icon">🔁</span>
+                        <span class="tab-title">Sequence Repeat</span>
+                    </button>
+                    <button class="mode-tab-btn" id="mode-speed">
+                        <span class="tab-icon">⚡</span>
+                        <span class="tab-title">Speed Numbers</span>
+                    </button>
+                </div>
+
+                <!-- Game Dashboard Header -->
+                <div class="game-hud">
+                    <div class="hud-item" id="hud-task-item">
+                        <span class="hud-label">TASK</span>
+                        <span class="hud-value hud-task" id="game-task">1 / 1</span>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">LEVEL</span>
+                        <span class="hud-value" id="game-level">1</span>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">SCORE</span>
+                        <span class="hud-value" id="game-score">0000</span>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">LIVES</span>
+                        <span class="hud-value flex-row" id="game-lives">
+                            <span class="heart active">❤️</span>
+                            <span class="heart active">❤️</span>
+                            <span class="heart active">❤️</span>
+                        </span>
+                    </div>
+                    <div class="hud-item" id="hud-timer-item" style="display: none;">
+                        <span class="hud-label">TIME</span>
+                        <span class="hud-value" id="game-timer">0:00</span>
+                    </div>
+                    <div class="hud-item" id="hud-exit-item" style="display: none;">
+                        <span class="hud-label">ACTION</span>
+                        <button class="btn btn-mini btn-abort" id="exit-game-btn">ABORT</button>
+                    </div>
+                </div>
+
+                <!-- Main Interactive Game Board -->
+                <div class="game-board-wrapper" id="game-board-wrapper">
+                    <div class="game-board" id="game-board">
+                        <!-- Tiles will be dynamically injected here by JS -->
+                    </div>
+                    
+                    <!-- Overlay Screens (Start, Calibration, Memorize, Game Over, Success) -->
+                    <div class="game-overlay" id="game-overlay">
+                        <div class="overlay-content game-start-card" id="overlay-start-content">
+                            <div class="game-card-bg-anim" aria-hidden="true"></div>
+                            <div class="game-card-scanline" aria-hidden="true"></div>
+                            <div class="game-card-particles" aria-hidden="true">
+                                <span></span><span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                            <div class="game-card-inner">
+                                <div class="game-card-icon-wrap">
+                                    <span class="game-card-icon-ring" aria-hidden="true"></span>
+                                    <span class="game-card-icon" id="start-game-icon">🌐</span>
+                                </div>
+                                <h3 class="game-card-title" id="start-game-title">GRID RECALL</h3>
+                                <p class="game-card-subtitle" id="start-game-subtitle"></p>
+                                <p class="game-card-desc" id="start-game-desc">Watch the flashing patterns, memorize their positions, then select them in any order.</p>
+                                <div class="game-card-badges" id="start-game-badges">
+                                    <span class="game-badge" id="start-game-type-badge">ARCADE</span>
+                                    <span class="game-badge" id="start-game-diff-badge">STANDARD</span>
+                                </div>
+                                <button class="btn game-card-btn" id="start-game-btn">INITIALIZE CORE</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Dynamic Pre-Game Neural Calibration loading animation screen -->
+                        <div class="overlay-content hidden" id="overlay-calibration-content" style="width: 100%; max-width: 400px;">
+                            <h3 class="glow-purple text-gradient" style="font-size: 1.5rem; margin-bottom: 0.5rem;">NEURAL SYNCING</h3>
+                            <p style="color: var(--neon-cyan); font-size: 0.8rem; font-family: monospace; letter-spacing: 2px; margin-bottom: 1rem;">CALIBRATING COGNITIVE CORE...</p>
+                            <div class="calibration-progress-container" style="width: 100%; height: 8px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; margin-bottom: 1rem; border: 1px solid rgba(0, 240, 255, 0.15);">
+                                <div class="calibration-progress-bar" id="calibration-progress" style="width: 0%; height: 100%; background: linear-gradient(to right, var(--neon-cyan), var(--neon-purple)); border-radius: 10px; transition: width 0.1s linear;"></div>
+                            </div>
+                            <div class="calibration-logs" id="calibration-logs" style="font-family: monospace; font-size: 0.75rem; text-align: left; background: rgba(0,0,0,0.5); padding: 0.8rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.05); height: 85px; overflow-y: hidden; color: var(--text-secondary);">
+                                <!-- Log lines injected by app.js -->
+                            </div>
+                        </div>
+
+                        <div class="overlay-content hidden" id="overlay-memorize-content">
+                            <h3 class="glow-purple" id="memorize-title">MEMORIZE GRID</h3>
+                            <p class="memorize-phase-label" id="memorize-phase-label">MEMORIZATION PHASE</p>
+                            <p class="timer-countdown" id="memorize-timer">3</p>
+                        </div>
+
+                        <div class="overlay-content hidden" id="overlay-recall-content">
+                            <h3 class="glow-cyan">RECALL PHASE</h3>
+                            <p class="timer-countdown recall-timer" id="recall-timer">5:00</p>
+                            <p id="recall-instruction">Enter what you memorized below.</p>
+                        </div>
+                        
+                        <div class="overlay-content hidden" id="overlay-gameover-content">
+                            <h3 class="glow-magenta">SYSTEM FAILURE</h3>
+                            <p>You ran out of cognitive cores. Final level achieved: <span id="final-level">1</span></p>
+                            <p>Score: <span id="final-score" class="neon-glow">0</span></p>
+                            <button class="btn btn-secondary btn-glow" id="restart-game-btn">REBOOT SYSTEM</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Game Tips / Info Footer -->
+                <div class="game-tip text-center">
+                    <span>💡 Tip: Take a deep breath. Focus on visual sequences for maximum capacity.</span>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about-section" class="tab-content">
+            <div class="section-header text-center">
+                <h2 class="neon-cyan">ABOUT THE MANSA PLATFORM</h2>
+                <p>Bridging the gap between mental sports, stackmat tracking, and high-octane gaming dashboards.</p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-card-glow"></div>
+                    <div class="about-icon">🌐</div>
+                    <h3>Mental Esports</h3>
+                    <p>MANSA transforms traditional cognitive tests, speedcubing, and memory stackmat routines into gamified web challenges. Build reflexes, visual recognition, and spatial awareness.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-card-glow"></div>
+                    <div class="about-icon">⏱️</div>
+                    <h3>Precision Tracking</h3>
+                    <p>Inspired by standard speed-stacking mats, our dashboard supports sub-millisecond input responsiveness to let you log, analyze, and train memory metrics at competitive speeds.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-card-glow"></div>
+                    <div class="about-icon">🏆</div>
+                    <h3>Competitive Ladder</h3>
+                    <p>Compete in weekly memory trials. Work through progressive grid flashes, number recall constraints, and card association decks to scale global tiers and earn seasonal badges.</p>
+                </div>
+            </div>
+
+            <!-- Technical Spec Info -->
+            <div class="tech-spec-box">
+                <div class="tech-spec-header">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                    <span class="terminal-title">MANSA // COGNITIVE CORE SPECS</span>
+                </div>
+                <div class="tech-spec-content">
+                    <p class="code-line"><span class="code-lbl">Engine:</span> MansaJS 1.0.4 - WebGL Particle Core Enabled</p>
+                    <p class="code-line"><span class="code-lbl">Frequency:</span> 120Hz refresh layout matching human visual latency</p>
+                    <p class="code-line"><span class="code-lbl">Accuracy:</span> High-precision microsecond pointer tracking</p>
+                    <p class="code-line"><span class="code-lbl">Purpose:</span> Memory expansion, cognitive endurance testing, and visual spatial grid-locking</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOGIN SECTION -->
+        <section id="login-section" class="tab-content">
+            <div class="login-wrapper">
+                <div class="login-box glass-panel">
+                    <div class="login-tabs">
+                        <button class="login-tab-btn active" id="tab-btn-user" data-role="user">User Portal</button>
+                        <button class="login-tab-btn" id="tab-btn-admin" data-role="admin">Admin Terminal</button>
+                    </div>
+
+                    <div class="login-form-container">
+                        <!-- Heading shifts dynamically based on selected role -->
+                        <h2 class="form-title" id="form-role-title">ATHLETE SIGN IN</h2>
+                        <p class="form-subtitle" id="form-role-subtitle">Provide your credentials to sync training progress</p>
+
+                        <form id="auth-form" class="auth-form">
+                            <div class="form-group">
+                                <label for="auth-email">EMAIL ADDRESS</label>
+                                <div class="input-wrapper">
+                                    <input type="email" id="auth-email" required placeholder="name@domain.com">
+                                    <span class="input-glow"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="auth-password">SECURE KEYCODE</label>
+                                <div class="input-wrapper">
+                                    <input type="password" id="auth-password" required placeholder="••••••••">
+                                    <span class="input-glow"></span>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block btn-glow" id="auth-submit-btn">
+                                <span class="btn-text">ACCESS CORE</span>
+                            </button>
+                        </form>
+
+                        <div class="form-helper" id="signup-toggle-helper">
+                            <span>New Athlete? <a href="#" id="signup-toggle">Enlist in the Program</a></span>
+                        </div>
+
+                        <!-- Easy Login Credentials Box for user evaluation -->
+                        <div class="demo-credentials">
+                            <h4>FAST-ACCESS LOGIN (TESTING):</h4>
+                            <div class="credentials-row">
+                                <button class="btn btn-mini btn-cyan" id="demo-user-btn">Load Demo User</button>
+                                <button class="btn btn-mini btn-purple" id="demo-admin-btn">Load Demo Admin</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- USER DASHBOARD SECTION -->
+        <section id="user-dashboard-section" class="tab-content">
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <div>
+                        <span class="dashboard-badge user-badge">ATHLETE DASHBOARD</span>
+                        <h2 class="neon-cyan" id="user-dash-welcome">WELCOME BACK, ATHLETE</h2>
+                    </div>
+                    <div class="dashboard-actions">
+                        <button class="btn btn-secondary btn-mini" id="user-start-train-btn">START NEW RUN</button>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="dashboard-stats">
+                    <div class="dash-stat-card">
+                        <span class="card-label">CURRENT RANK LEVEL</span>
+                        <div class="card-large-value" id="user-dash-level">Level 5</div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-fill" id="user-dash-xp-progress" style="width: 65%;"></div>
+                        </div>
+                        <span class="card-subtext" id="user-dash-xp-txt">650 / 1000 XP to next tier</span>
+                    </div>
+
+                    <div class="dash-stat-card">
+                        <span class="card-label">PERSONAL RECORD</span>
+                        <div class="card-large-value neon-purple" id="user-dash-highscore">24,500</div>
+                        <span class="card-subtext">Achieved on Grid Flash</span>
+                    </div>
+
+                    <div class="dash-stat-card">
+                        <span class="card-label">COGNITIVE DRILLS RUN</span>
+                        <div class="card-large-value neon-cyan" id="user-dash-runs">14</div>
+                        <span class="card-subtext">Weekly Streak: 4 Days</span>
+                    </div>
+                </div>
+
+                <!-- Main Dashboard Grid -->
+                <div class="dashboard-main-grid">
+                    <!-- Progress Chart (Vanilla styled bar charts) -->
+                    <div class="dashboard-panel glass-panel flex-grow">
+                        <h3>TRAINING INTENSITY ANALYSIS</h3>
+                        <div class="vanilla-chart" id="user-progress-chart">
+                            <!-- Visual bars generated dynamically by Javascript -->
+                        </div>
+                    </div>
+
+                    <!-- Training Records Log -->
+                    <div class="dashboard-panel glass-panel">
+                        <h3>RECENT DRILLS LOG</h3>
+                        <div class="table-container">
+                            <table class="dashboard-table">
+                                <thead>
+                                    <tr>
+                                        <th>Drill</th>
+                                        <th>Accuracy</th>
+                                        <th>Score</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="user-drill-history">
+                                    <!-- History rows dynamically injected -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADMIN DASHBOARD SECTION -->
+        <section id="admin-dashboard-section" class="tab-content">
+            <div class="dashboard-container">
+                <div class="dashboard-header">
+                    <div>
+                        <span class="dashboard-badge admin-badge">ADMIN CONTROL TERMINAL</span>
+                        <h2 class="neon-purple">SYSTEM OVERVIEW</h2>
+                    </div>
+                    <div class="dashboard-actions">
+                        <button class="btn btn-secondary btn-mini" id="admin-reset-system-btn">RESET SIMULATOR DB</button>
+                    </div>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="dashboard-stats">
+                    <div class="dash-stat-card">
+                        <span class="card-label">TOTAL ATHLETES</span>
+                        <div class="card-large-value neon-cyan" id="admin-dash-users-count">3</div>
+                        <span class="card-subtext">Registered user profiles</span>
+                    </div>
+
+                    <div class="dash-stat-card">
+                        <span class="card-label">SYSTEM DIFFICULTY MODIFIER</span>
+                        <div class="card-large-value neon-purple" id="admin-dash-difficulty">1.2x</div>
+                        <span class="card-subtext">Core memorization timers scaling</span>
+                    </div>
+
+                    <div class="dash-stat-card">
+                        <span class="card-label">PEAK ACCURACY LOGGED</span>
+                        <div class="card-large-value neon-magenta">98.8%</div>
+                        <span class="card-subtext">By top tier users</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-main-grid">
+                    <!-- User Management Table -->
+                    <div class="dashboard-panel glass-panel flex-grow">
+                        <h3>ATHLETE DATABASE MANAGEMENT</h3>
+                        <div class="table-container">
+                            <table class="dashboard-table">
+                                <thead>
+                                    <tr>
+                                        <th>Athlete Username</th>
+                                        <th>Email</th>
+                                        <th>Max Score</th>
+                                        <th>Role</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-user-list">
+                                    <!-- Dynamic elements from app.js -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Simulator Config Dashboard -->
+                    <div class="dashboard-panel glass-panel">
+                        <h3>ARENA CORE PARAMETERS</h3>
+                        <form id="admin-config-form" class="config-form">
+                            <div class="form-group-compact">
+                                <label for="config-flash-time">FLASH DURATION (MS)</label>
+                                <input type="number" id="config-flash-time" min="200" max="3000" step="100" value="1000">
+                            </div>
+                            <div class="form-group-compact">
+                                <label for="config-grid-size">GRID START SIZE</label>
+                                <select id="config-grid-size">
+                                    <option value="3">3x3 Grid (Beginner)</option>
+                                    <option value="4" selected>4x4 Grid (Standard)</option>
+                                    <option value="5">5x5 Grid (Expert)</option>
+                                </select>
+                            </div>
+                            <div class="form-group-compact">
+                                <label for="config-difficulty-scale">DIFFICULTY SCALER</label>
+                                <input type="range" id="config-difficulty-scale" min="0.5" max="2.0" step="0.1" value="1.2">
+                                <div class="range-display" id="range-display-val">1.2x</div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-mini btn-block btn-glow">APPLY PARAMETERS</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Global Sound Effects (Dummy Audio tags for triggers) -->
+    <!-- These are safely fallbacked if blocked by browser autoplay policies -->
+    <audio id="snd-click" preload="auto"></audio>
+    <audio id="snd-success" preload="auto"></audio>
+    <audio id="snd-fail" preload="auto"></audio>
+    <audio id="snd-gameover" preload="auto"></audio>
+
+    <footer class="footer">
+        <p>&copy; 2026 MANSA. Mind-gaming and cognitive training arena. Created for mental athletes.</p>
+    </footer>
+
+    <!-- App Script -->
+    <script type="module" src="app.js"></script>
 </body>
 </html>
